@@ -32,10 +32,14 @@ import {
 import { DEFAULT_SERVICE_FLOW, WORSHIP_SONGS, KNOWN_SCRIPTURES } from "./data";
 import { ServiceItem, ActiveSlideState, BibleVerse, SongSuggestion, WorshipSong } from "./types";
 import LivePreview from "./components/LivePreview";
+import ServiceDesignerHome from "./components/ServiceDesignerHome";
 
 export default function App() {
   // --- Service State ---
   const [serviceItems, setServiceItems] = useState<ServiceItem[]>(DEFAULT_SERVICE_FLOW);
+  const [currentView, setCurrentView] = useState<'home' | 'desk'>('home');
+  const [serviceTitle, setServiceTitle] = useState<string>("Sunday Celebrations");
+  const [speakerName, setSpeakerName] = useState<string>("Pastor David");
   const [activeItemId, setActiveItemId] = useState<string>("item-2"); // Default to worship session
   const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0);
   
@@ -486,12 +490,34 @@ export default function App() {
                 v2.1 AI-Engine LIVE
               </span>
             </div>
-            <p className="text-xs text-sky-700/80 font-medium">Church Presentation & AI-powered Sermon Listening Hub</p>
+            <p className="text-xs text-rose-700/90 font-mono font-bold">
+              Active Focus: <span className="text-sky-700 uppercase">{serviceTitle}</span> {speakerName ? `— Spkr: ${speakerName}` : ""}
+            </p>
           </div>
         </div>
 
         {/* Real-time speech simulator controls */}
         <div className="flex items-center flex-wrap gap-2.5">
+          {/* Dynamic perspective toggler tool */}
+          <button
+            onClick={() => {
+              const goingToDesk = currentView === 'home';
+              setCurrentView(goingToDesk ? 'desk' : 'home');
+              setSuccessToast(goingToDesk ? "Worship Operator desk launched!" : "Service Setup Designer loaded.");
+            }}
+            id="btn-switch-perspective"
+            className={`flex items-center space-x-1.5 text-xs font-mono font-bold uppercase px-3 py-1.5 rounded-lg shadow-sm border transition-all cursor-pointer ${
+              currentView === 'home'
+                ? "bg-sky-600 border-sky-500 text-white hover:bg-sky-500"
+                : "bg-amber-500 border-amber-400 text-amber-950 hover:bg-amber-400"
+            }`}
+          >
+            <Sliders className="h-3.5 w-3.5" />
+            <span>{currentView === 'home' ? "Launch Operator Desk" : "Return to Designer"}</span>
+          </button>
+
+          <div className="h-5 w-[1px] bg-slate-200" />
+
           {/* simulated input audio meter */}
           {isAiListening && (
             <div className="hidden md:flex items-center space-x-1.5 bg-sky-50 border border-sky-100 px-3 py-1.5 rounded-md">
@@ -554,8 +580,25 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Grid: Control Station on Left, Congregational output on Right */}
-      <main className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-5 p-4 sm:p-5 overflow-hidden">
+      {/* Dynamic View Swapper */}
+      {currentView === "home" ? (
+        <ServiceDesignerHome
+          serviceItems={serviceItems}
+          onChangeServiceItems={setServiceItems}
+          selectedSongId={selectedSongId}
+          onChangeSelectedSong={setSelectedSongId}
+          serviceTitle={serviceTitle}
+          onChangeServiceTitle={setServiceTitle}
+          speakerName={speakerName}
+          onChangeSpeakerName={setSpeakerName}
+          worshipSongs={WORSHIP_SONGS}
+          onLaunch={() => {
+            setCurrentView("desk");
+            setSuccessToast("Welcome to the Active Presentation Operator Desk!");
+          }}
+        />
+      ) : (
+        <main className="flex-1 grid grid-cols-1 xl:grid-cols-12 gap-5 p-4 sm:p-5 overflow-hidden">
         
         {/* ======================================= */}
         {/* LEFT PANEL: Media Operator Control Room */}
@@ -1251,6 +1294,7 @@ export default function App() {
         </div>
 
       </main>
+      )}
 
       {/* Footer Branding Margins */}
       <footer className="border-t border-sky-100 bg-white py-3.5 px-4 flex justify-between items-center text-xs text-slate-500 font-mono">
