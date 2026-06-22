@@ -396,81 +396,81 @@ export default function ServiceDesignerHome({
   };
 
   return (
-    <div className="flex-1 bg-slate-50 overflow-y-auto px-4 py-8 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <div className="flex-1 bg-space-bg text-slate-100 overflow-y-auto px-4 py-8 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pb-32">
       {/* Intro hero container */}
       <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center space-x-2 bg-sky-50 border border-sky-100 rounded-full py-1 px-3.5 mb-4 shadow-sm">
-          <Sparkles className="h-4 w-4 text-sky-600 animate-spin" />
-          <span className="text-[11px] font-mono tracking-widest text-sky-800 font-bold uppercase">
+        <div className="inline-flex items-center space-x-2 bg-panel-dark border border-tech-border rounded-full py-1 px-3.5 mb-4 shadow-sm">
+          <Sparkles className="h-4 w-4 text-neon-blue animate-pulse" />
+          <span className="text-[10px] font-mono tracking-widest text-neon-blue font-bold uppercase">
             Service Workflow Manager
           </span>
         </div>
         
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-black tracking-tight text-slate-900 leading-[1.05]">
-          DESIGN YOUR <span className="text-sky-600 underline decoration-sky-200 decoration-wavy">WORSHIP SERVICE</span>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-black tracking-tight text-white leading-[1.05]">
+          DESIGN YOUR <span className="text-neon-blue underline decoration-neon-blue/30 decoration-wavy">WORSHIP SERVICE</span>
         </h1>
-        <p className="mt-4 text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-4 text-sm sm:text-base text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed">
           Craft your precise timeline, schedule songs, configure details, and prepare Gemini-powered scripture listening tools. Select a starter template below or customize your segments manually.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-24">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* LEFT COLUMN (COL SPAN 5): Configurations & Starter blueprints */}
         <div className="lg:col-span-5 space-y-6">
           
           {/* Section A: Basic parameters */}
-          <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm space-y-4">
-            <div className="flex items-center space-x-2 border-b border-slate-100 pb-3">
-              <Sliders className="h-4 w-4 text-sky-600" />
-              <h2 className="text-sm font-display font-black text-slate-900 uppercase tracking-wide">
+          <div className="bg-panel-dark border border-tech-border rounded-2xl p-5 shadow-lg space-y-4">
+            <div className="flex items-center space-x-2 border-b border-tech-border pb-3">
+              <Sliders className="h-4 w-4 text-neon-blue" />
+              <h2 className="text-xs font-mono font-black text-white uppercase tracking-wider">
                 Primary Service Details
               </h2>
             </div>
 
             <div className="space-y-3">
               <div>
-                <label className="block text-[10px] font-mono uppercase font-black text-slate-400 tracking-wider mb-1">
+                <label className="block text-[10px] font-mono uppercase font-black text-slate-500 tracking-wider mb-1">
                   Service Title / Theme
                 </label>
                 <input 
                   type="text" 
                   value={serviceTitle}
                   onChange={(e) => onChangeServiceTitle(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded px-3 py-2 text-xs font-bold text-slate-800 focus:bg-white focus:border-sky-500 focus:outline-none transition-all"
+                  className="w-full bg-panel-mid border border-tech-border rounded px-3 py-2 text-xs font-bold text-slate-100 focus:bg-panel-light focus:border-neon-blue focus:outline-none transition-all placeholder-slate-600"
                   placeholder="e.g. Sunday Morning Liturgy"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] font-mono uppercase font-black text-slate-400 tracking-wider mb-1">
+                  <label className="block text-[10px] font-mono uppercase font-black text-slate-500 tracking-wider mb-1">
                     Preacher / Speaker
                   </label>
                   <div className="relative">
-                    <User className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-slate-400" />
+                    <User className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-slate-500" />
                     <input 
                       type="text" 
                       value={speakerName}
                       onChange={(e) => onChangeSpeakerName(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded pl-8 pr-3 py-2 text-xs font-bold text-slate-800 focus:bg-white focus:border-sky-500 focus:outline-none transition-all"
+                      className="w-full bg-panel-mid border border-tech-border rounded pl-8 pr-3 py-2 text-xs font-bold text-slate-100 focus:bg-panel-light focus:border-neon-blue focus:outline-none transition-all placeholder-slate-600"
                       placeholder="David Wallace"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-mono uppercase font-black text-slate-400 tracking-wider mb-1">
+                  <label className="block text-[10px] font-mono uppercase font-black text-slate-500 tracking-wider mb-1">
                     Primary Worship Song
                   </label>
                   <div className="relative">
-                    <Music className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-slate-400" />
+                    <Music className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-slate-500" />
                     <select
                       value={selectedSongId}
                       onChange={(e) => onChangeSelectedSong(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded pl-8 pr-3 py-2 text-xs font-bold text-slate-700 focus:bg-white focus:border-sky-500 focus:outline-none transition-all cursor-pointer"
+                      className="w-full bg-panel-mid border border-tech-border rounded pl-8 pr-3 py-2 text-xs font-bold text-slate-200 focus:bg-panel-light focus:border-neon-blue focus:outline-none transition-all cursor-pointer"
                     >
                       {worshipSongs.map(song => (
-                        <option key={song.id} value={song.id}>
+                        <option key={song.id} value={song.id} className="bg-panel-dark text-slate-200">
                           {song.title} ({song.author})
                         </option>
                       ))}
@@ -483,7 +483,7 @@ export default function ServiceDesignerHome({
 
           {/* Section B: Preset starter blueprints cards */}
           <div className="space-y-3">
-            <h3 className="text-[11px] font-mono uppercase font-black text-slate-400 tracking-widest block pl-1">
+            <h3 className="text-[10px] font-mono uppercase font-black text-slate-500 tracking-widest block pl-1">
               Select Starter Template Flow
             </h3>
 
@@ -494,23 +494,23 @@ export default function ServiceDesignerHome({
                   <div 
                     key={idx}
                     onClick={() => handleApplyTemplate(idx)}
-                    className="group relative bg-white border border-slate-200/80 rounded-xl p-4 hover:border-sky-400 cursor-pointer transition-all duration-300 hover:shadow-md text-left"
+                    className="group relative bg-panel-dark border border-tech-border rounded-xl p-4 hover:border-neon-blue hover:shadow-[0_0_15px_rgba(59,130,246,0.1)] cursor-pointer transition-all duration-300 text-left"
                   >
                     <div className="flex items-start space-x-3.5">
-                      <div className={`p-2.5 rounded-lg bg-gradient-to-br ${tpl.colorClass} text-white shadow-sm`}>
+                      <div className={`p-2.5 rounded-lg bg-gradient-to-br ${tpl.colorClass} text-white shadow-sm shrink-0`}>
                         <IconComp className="h-5 w-5" />
                       </div>
                       
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-2">
-                          <h4 className="text-sm font-display font-black text-slate-900 group-hover:text-sky-700 transition-colors">
+                          <h4 className="text-xs font-sans font-bold text-slate-200 group-hover:text-neon-blue transition-colors">
                             {tpl.name}
                           </h4>
-                          <span className="shrink-0 text-[9px] font-mono font-bold px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded">
+                          <span className="shrink-0 text-[8px] font-mono font-bold px-1.5 py-0.5 bg-panel-mid border border-tech-border text-slate-400 rounded">
                             {tpl.badge}
                           </span>
                         </div>
-                        <p className="mt-1 text-xs text-slate-500 font-medium leading-normal line-clamp-2">
+                        <p className="mt-1 text-xs text-slate-455 font-medium leading-normal line-clamp-2">
                           {tpl.description}
                         </p>
                       </div>
@@ -526,26 +526,26 @@ export default function ServiceDesignerHome({
         {/* RIGHT COLUMN (COL SPAN 7): Service timeline visual blueprint designer */}
         <div className="lg:col-span-7 space-y-6">
           
-          <div className="bg-white border border-sky-50 rounded-2xl shadow-sm p-5 space-y-4">
+          <div className="bg-panel-dark border border-tech-border rounded-2xl shadow-lg p-5 space-y-4">
             
-            <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+            <div className="flex justify-between items-center border-b border-tech-border pb-3">
               <div className="flex items-center space-x-2">
-                <Clock className="h-4.5 w-4.5 text-sky-600" />
-                <h2 className="text-sm font-display font-black text-slate-900 uppercase tracking-wide">
+                <Clock className="h-4.5 w-4.5 text-neon-blue" />
+                <h2 className="text-xs font-mono font-black text-white uppercase tracking-wider">
                   Service Timeline Segments ({serviceItems.length})
                 </h2>
               </div>
-              <span className="text-[10px] font-mono text-slate-400 font-semibold uppercase">
+              <span className="text-[10px] font-mono text-slate-500 font-semibold uppercase">
                 Active Setup Draft
               </span>
             </div>
 
             {/* Empty list illustration */}
             {serviceItems.length === 0 ? (
-              <div className="text-center py-10 border border-dashed border-slate-200 rounded-xl">
-                <Smile className="h-8 w-8 text-slate-300 mx-auto mb-2 animate-bounce" />
-                <span className="block text-xs font-bold text-slate-500">No active timeline segments</span>
-                <p className="text-[11px] text-slate-400 mt-0.5">Click a starter template or use the form below to begin.</p>
+              <div className="text-center py-10 border border-dashed border-tech-border rounded-xl">
+                <Smile className="h-8 w-8 text-slate-600 mx-auto mb-2 animate-bounce" />
+                <span className="block text-xs font-bold text-slate-400">No active timeline segments</span>
+                <p className="text-[11px] text-slate-550 mt-0.5">Click a starter template or use the form below to begin.</p>
               </div>
             ) : (
               <div className="space-y-2.5 max-h-[360px] overflow-y-auto pr-1">
@@ -557,18 +557,18 @@ export default function ServiceDesignerHome({
                       key={item.id}
                       className={`group border rounded-xl p-3 flex flex-col transition-all duration-150 ${
                         isEditing 
-                          ? "border-sky-300 bg-sky-50/50" 
-                          : "border-slate-100 bg-slate-50/40 hover:bg-white hover:border-slate-200"
+                          ? "border-neon-blue/60 bg-panel-mid" 
+                          : "border-tech-border bg-panel-dark hover:bg-panel-mid hover:border-tech-border"
                       }`}
                     >
                       {isEditing ? (
                         /* Inline Edit Form */
                         <div className="space-y-3 text-xs">
                           <div className="flex justify-between items-center">
-                            <span className="font-mono text-[9px] text-sky-800 font-bold uppercase">
+                            <span className="font-mono text-[9px] text-neon-blue font-bold uppercase">
                               Edit Segment details
                             </span>
-                            <span className="text-[10px] font-mono text-slate-400 font-bold uppercase">
+                            <span className="text-[10px] font-mono text-slate-500 font-bold uppercase">
                               Seg #{index + 1}
                             </span>
                           </div>
@@ -579,14 +579,14 @@ export default function ServiceDesignerHome({
                                 type="text"
                                 value={editedTitle}
                                 onChange={(e) => setEditedTitle(e.target.value)}
-                                className="col-span-2 bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-800 focus:outline-none focus:border-sky-400 font-bold"
+                                className="col-span-2 bg-panel-dark border border-tech-border rounded px-2.5 py-1 text-xs text-white focus:outline-none focus:border-neon-blue font-bold placeholder-slate-600"
                                 placeholder="Segment Name"
                               />
                               <input 
                                 type="text"
                                 value={editedDuration}
                                 onChange={(e) => setEditedDuration(e.target.value)}
-                                className="bg-white border border-slate-200 rounded px-2 py-1 text-xs text-slate-800 focus:outline-none focus:border-sky-400"
+                                className="bg-panel-dark border border-tech-border rounded px-2.5 py-1 text-xs text-white focus:outline-none focus:border-neon-blue placeholder-slate-600"
                                 placeholder="e.g. 10 min"
                               />
                             </div>
@@ -595,19 +595,19 @@ export default function ServiceDesignerHome({
                               value={editedNotes}
                               onChange={(e) => setEditedNotes(e.target.value)}
                               rows={1}
-                              className="w-full bg-white border border-slate-200 rounded p-1.5 text-xs text-slate-800 focus:outline-none focus:border-sky-400"
+                              className="w-full bg-panel-dark border border-tech-border rounded p-1.5 text-xs text-white focus:outline-none focus:border-neon-blue placeholder-slate-600"
                               placeholder="Notes & operator guidelines"
                             />
 
                             <div>
-                              <label className="block text-[9px] font-mono font-bold text-slate-400 uppercase mb-0.5">
+                              <label className="block text-[8px] font-mono font-bold text-slate-500 uppercase mb-0.5">
                                 Presentation Slide Content (Separate Slides with empty line spacing)
                               </label>
                               <textarea
                                 value={editedSlidesText}
                                 onChange={(e) => setEditedSlidesText(e.target.value)}
                                 rows={2}
-                                className="w-full h-14 bg-white border border-slate-200 rounded p-1.5 font-mono text-[10px] text-slate-700 focus:outline-none"
+                                className="w-full h-14 bg-panel-dark border border-tech-border rounded p-1.5 font-mono text-[10px] text-slate-305 focus:outline-none focus:border-neon-blue placeholder-slate-600"
                                 placeholder="Slide 1 text here&#10;&#10;Slide 2 text here (empty line separator)"
                               />
                             </div>
@@ -616,13 +616,13 @@ export default function ServiceDesignerHome({
                           <div className="flex justify-end gap-1.5">
                             <button
                               onClick={() => setActiveEditingId(null)}
-                              className="px-2 py-1 bg-slate-200 hover:bg-slate-300 text-slate-600 font-mono text-[10px] uppercase rounded cursor-pointer"
+                              className="px-2 py-1 bg-panel-light border border-tech-border text-slate-300 hover:text-white font-mono text-[10px] uppercase rounded cursor-pointer"
                             >
                               Cancel
                             </button>
                             <button
                               onClick={() => handleSaveInlineEdit(item.id)}
-                              className="px-2 py-1 bg-sky-600 hover:bg-sky-500 text-white font-mono text-[10px] uppercase rounded font-bold cursor-pointer"
+                              className="px-2.5 py-1 bg-neon-blue hover:bg-blue-600 text-white font-mono text-[10px] uppercase rounded font-bold cursor-pointer"
                             >
                               Apply updates
                             </button>
@@ -633,16 +633,16 @@ export default function ServiceDesignerHome({
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center space-x-3.5 min-w-0">
                             {/* Sequence dot indicator */}
-                            <span className="text-[10px] font-mono font-bold text-slate-400">
+                            <span className="text-[10px] font-mono font-bold text-slate-500">
                               0{index + 1}
                             </span>
                             
                             <div className="min-w-0">
                               <div className="flex items-center gap-1.5">
-                                <h4 className="text-xs font-display font-black text-slate-800 truncate">
+                                <h4 className="text-xs font-sans font-bold text-slate-200 truncate">
                                   {item.title}
                                 </h4>
-                                <span className="bg-slate-100 text-slate-500 text-[8px] font-mono px-1 rounded uppercase font-bold shrink-0">
+                                <span className="bg-panel-mid text-slate-400 text-[8px] font-mono px-1.5 py-0.2 rounded border border-tech-border uppercase font-bold shrink-0">
                                   {item.duration}
                                 </span>
                               </div>
@@ -657,38 +657,38 @@ export default function ServiceDesignerHome({
                             {/* edit index inline btn */}
                             <button
                               onClick={() => handleStartEditing(item)}
-                              className="p-1 text-slate-400 hover:text-sky-600 hover:bg-sky-50 rounded cursor-pointer"
+                              className="p-1 text-slate-550 hover:text-neon-blue hover:bg-panel-light rounded cursor-pointer"
                               title="Edit parameters"
                             >
-                              <Edit className="h-3 w-3" />
+                              <Edit className="h-3.5 w-3.5" />
                             </button>
 
                             {/* Move Up/Down helpers */}
                             <button
                               disabled={index === 0}
                               onClick={() => moveItemUp(index)}
-                              className="p-1 text-slate-400 hover:text-sky-600 hover:bg-slate-100 rounded disabled:opacity-20 cursor-pointer"
+                              className="p-1 text-slate-550 hover:text-neon-blue hover:bg-panel-light rounded disabled:opacity-20 cursor-pointer"
                               title="Move Up"
                             >
-                              <ArrowUp className="h-3.5 w-3.5" />
+                              <ArrowUp className="h-4 w-4" />
                             </button>
 
                             <button
                               disabled={index === serviceItems.length - 1}
                               onClick={() => moveItemDown(index)}
-                              className="p-1 text-slate-400 hover:text-sky-600 hover:bg-slate-100 rounded disabled:opacity-20 cursor-pointer"
+                              className="p-1 text-slate-550 hover:text-neon-blue hover:bg-panel-light rounded disabled:opacity-20 cursor-pointer"
                               title="Move Down"
                             >
-                              <ArrowDown className="h-3.5 w-3.5" />
+                              <ArrowDown className="h-4 w-4" />
                             </button>
 
                             {/* Delete timeline element */}
                             <button
                               onClick={() => deleteItem(item.id)}
-                              className="p-1 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded cursor-pointer"
+                              className="p-1 text-slate-550 hover:text-rose-500 hover:bg-rose-950/20 rounded cursor-pointer"
                               title="Remove Segment"
                             >
-                              <Trash2 className="h-3.5 w-3.5" />
+                              <Trash2 className="h-4 w-4" />
                             </button>
                           </div>
                         </div>
@@ -700,10 +700,10 @@ export default function ServiceDesignerHome({
             )}
 
             {/* Row C: Add Custom Segment input card Form */}
-            <form onSubmit={handleAddSegment} className="bg-slate-50 rounded-xl p-3.5 border border-slate-200/60 text-xs space-y-3">
+            <form onSubmit={handleAddSegment} className="bg-panel-mid rounded-xl p-3.5 border border-tech-border text-xs space-y-3">
               <div className="flex items-center space-x-1.5">
-                <Plus className="h-3.5 w-3.5 text-sky-600" />
-                <span className="font-mono text-[10px] text-sky-800 font-bold uppercase">
+                <Plus className="h-3.5 w-3.5 text-neon-blue" />
+                <span className="font-mono text-[10px] text-neon-blue font-bold uppercase">
                   Add Custom Service Segment
                 </span>
               </div>
@@ -716,7 +716,7 @@ export default function ServiceDesignerHome({
                     value={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
                     placeholder="e.g. Altar Prayer Call"
-                    className="w-full bg-white border border-slate-200 rounded px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-sky-400"
+                    className="w-full bg-panel-dark border border-tech-border rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-neon-blue placeholder-slate-600 font-bold"
                   />
                 </div>
                 <div>
@@ -725,7 +725,7 @@ export default function ServiceDesignerHome({
                     value={newDuration}
                     onChange={(e) => setNewDuration(e.target.value)}
                     placeholder="e.g. 10 min"
-                    className="w-full bg-white border border-slate-200 rounded px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-sky-400"
+                    className="w-full bg-panel-dark border border-tech-border rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-neon-blue placeholder-slate-600"
                   />
                 </div>
               </div>
@@ -736,12 +736,12 @@ export default function ServiceDesignerHome({
                   value={newNotes}
                   onChange={(e) => setNewNotes(e.target.value)}
                   placeholder="e.g. Sarah prays. Slides have responsive scriptures"
-                  className="w-full bg-white border border-slate-200 rounded px-2.5 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-sky-400"
+                  className="w-full bg-panel-dark border border-tech-border rounded px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-neon-blue placeholder-slate-600"
                 />
               </div>
 
               <div>
-                <label className="block text-[9px] font-mono font-bold text-slate-400 uppercase mb-0.5">
+                <label className="block text-[8px] font-mono font-bold text-slate-500 uppercase mb-0.5">
                   Initial Presentation Slide Text (Optional. Press Enter twice for next slide)
                 </label>
                 <textarea 
@@ -749,14 +749,14 @@ export default function ServiceDesignerHome({
                   onChange={(e) => setNewSlidesText(e.target.value)}
                   rows={2}
                   placeholder="Slide 1 content&#10;&#10;Slide 2 content (with spacer row)"
-                  className="w-full h-14 bg-white border border-slate-100 rounded text-[10px] font-mono p-1.5 text-slate-700 focus:outline-none"
+                  className="w-full h-14 bg-panel-dark border border-tech-border rounded text-[10px] font-mono p-1.5 text-slate-300 focus:outline-none focus:border-neon-blue placeholder-slate-600"
                 />
               </div>
 
               <div className="flex justify-end">
                 <button 
                   type="submit"
-                  className="bg-sky-50 border border-sky-200 text-sky-700 hover:bg-sky-100 text-[10px] font-mono uppercase font-black px-3.5 py-1.5 rounded cursor-pointer transition-all"
+                  className="bg-panel-light hover:bg-panel-dark border border-tech-border text-neon-blue text-[10px] font-mono uppercase font-black px-3.5 py-1.5 rounded cursor-pointer transition-all"
                 >
                   + Add Segment to Timeline
                 </button>
@@ -768,14 +768,14 @@ export default function ServiceDesignerHome({
       </div>
 
       {/* FOOTER PINNED HIGH CTA: Launch Presentation Desk */}
-      <div className="fixed bottom-0 left-0 right-0 py-4 px-6 bg-white border-t border-sky-100 flex justify-center items-center backdrop-blur-md bg-white/90 shadow-lg z-40">
+      <div className="fixed bottom-0 left-0 right-0 py-4 px-6 bg-panel-dark border-t border-tech-border flex justify-center items-center backdrop-blur-md bg-panel-dark/95 shadow-2xl z-40">
         <button
           onClick={onLaunch}
           disabled={serviceItems.length === 0}
-          className="bg-sky-600 hover:bg-sky-500 text-white font-display font-black uppercase text-sm tracking-widest px-8 py-3.5 rounded-full shadow-lg shadow-sky-600/25 flex items-center space-x-2 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-20 disabled:pointer-events-none cursor-pointer"
+          className="bg-neon-blue hover:bg-blue-600 text-white font-display font-black uppercase text-xs tracking-widest px-8 py-3.5 rounded-full shadow-lg shadow-blue-500/20 flex items-center space-x-2 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-20 disabled:pointer-events-none cursor-pointer"
         >
           <span>Launch Worship Operator Desk</span>
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="h-4.5 w-4.5" />
         </button>
       </div>
     </div>

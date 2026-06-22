@@ -120,28 +120,55 @@ Provide highly focused and clear output in the specified JSON structure. Be accu
 // 2. Scripture Search / Semantic search endpoint
 app.post("/api/ai/search-verse", async (req, res) => {
   try {
-    const { query } = req.body;
+    const { query, translation } = req.body;
+    const activeTranslation = translation ? String(translation).toUpperCase() : "ESV";
+    
     if (!query || typeof query !== 'string') {
       return res.status(400).json({ error: "Query is required." });
     }
 
     const ai = getGeminiClient();
     if (!ai) {
-      // Mock lookup fallback
+      // Mock lookup fallback styling depending on translation requested
+      let text = "";
+      let mockRef = query.includes("3:16") ? "John 3:16" : "Romans 12:1";
+      
+      if (mockRef === "John 3:16") {
+        if (activeTranslation === "KJV") {
+          text = "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.";
+        } else if (activeTranslation === "NIV") {
+          text = "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.";
+        } else if (activeTranslation === "GOODNEWS") {
+          text = "For God loved the world so much that he gave his only Son, so that everyone who believes in him may not die but have eternal life.";
+        } else { // ESV
+          text = "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life.";
+        }
+      } else { // Romans 12:1
+        if (activeTranslation === "KJV") {
+          text = "I beseech you therefore, brethren, by the mercies of God, that ye present your bodies a living sacrifice, holy, acceptable unto God, which is your reasonable service.";
+        } else if (activeTranslation === "NIV") {
+          text = "Therefore, I urge you, brothers and sisters, in view of God’s mercy, to offer your bodies as a living sacrifice, holy and pleasing to God—this is your true and proper worship.";
+        } else if (activeTranslation === "GOODNEWS") {
+          text = "So then, my friends, because of God's great mercy to us I appeal to you: Offer yourselves as a living sacrifice to God, dedicated to his service and pleasing to him.";
+        } else { // ESV
+          text = "I appeal to you therefore, brothers, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God, which is your spiritual worship.";
+        }
+      }
+
       return res.json({
-        reference: query.includes("3:16") ? "John 3:16" : "Romans 12:1",
-        text: query.includes("3:16") 
-          ? "For God so loved the world, that he gave his only Son, that whoever believes in him should not perish but have eternal life."
-          : "I appeal to you therefore, brothers, by the mercies of God, to present your bodies as a living sacrifice, holy and acceptable to God.",
-        translation: "ESV"
+        reference: mockRef,
+        text: text,
+        translation: activeTranslation
       });
     }
 
-    const systemPrompt = `You are a Bible search assistant. Convert the user's semantic query, search keywords, or verse reference into the exact scripture reference and full text. Ensure the text matches a readable translation like ESV or NIV.`;
+    const systemPrompt = `You are a Bible search assistant. Convert the user's semantic query, search keywords, or verse reference into the exact scripture reference and full text.
+You MUST provide the verse text in the requested Bible Translation if specified: ${activeTranslation}.
+Ensure the fetched text highly matches the theological phrasing of ${activeTranslation} (e.g. King James Version uses 'thee/thou/begotten', NIV is conversational and tidy, GOODNEWS uses simple and plain modern terms, ESV is word-for-word prose). Verify the text.`;
 
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash",
-      contents: `Search or find the text for: "${query}"`,
+      contents: `Search or find the text for: "${query}" in translation: "${activeTranslation}"`,
       config: {
         systemInstruction: systemPrompt,
         responseMimeType: "application/json",
@@ -149,8 +176,8 @@ app.post("/api/ai/search-verse", async (req, res) => {
           type: Type.OBJECT,
           properties: {
             reference: { type: Type.STRING, description: "Corrected/standardized Bible reference, e.g. John 3:16" },
-            text: { type: Type.STRING, description: "Exact verses text" },
-            translation: { type: Type.STRING, description: "Which translation was fetched, default 'ESV'" }
+            text: { type: Type.STRING, description: "Exact verses text fetched in the requested translation" },
+            translation: { type: Type.STRING, description: "Confirm the translation used (e.g. KJV, NIV, GOODNEWS, etc.)" }
           },
           required: ["reference", "text", "translation"]
         }

@@ -92,7 +92,7 @@ export default function LivePreview({ slideState, onThemeChange }: LivePreviewPr
         </div>
         <div className="flex items-center space-x-2">
           {/* Quick info tag of active slide */}
-          <span className="text-[10px] uppercase tracking-wider font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <span className="text-[10px] uppercase tracking-wider font-mono px-2 py-0.5 rounded bg-sovereign-amber/10 text-sovereign-amber border border-sovereign-amber/20">
             {slideState.type}
           </span>
           <button
@@ -189,37 +189,37 @@ export default function LivePreview({ slideState, onThemeChange }: LivePreviewPr
                   ) : slideState.type === "logo" ? (
                     <div className="flex flex-col items-center justify-center space-y-5">
                       {/* Logo Icon */}
-                      <div className="h-24 w-24 rounded-full border-2 border-amber-500 bg-amber-500/10 flex items-center justify-center shadow-[0_0_30px_rgba(245,158,11,0.25)] animate-smooth">
-                        <Sparkles className="h-12 w-12 text-amber-400" />
+                      <div className="h-24 w-24 rounded-full border-2 border-sovereign-amber bg-sovereign-amber/10 flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.3)] animate-pulse">
+                        <Sparkles className="h-12 w-12 text-sovereign-amber" />
                       </div>
                       <div className="space-y-1.5">
-                        <h1 className="text-5xl sm:text-6xl font-display font-black tracking-tighter text-white drop-shadow-md">
+                        <h1 className="text-5xl sm:text-6xl font-serif font-bold italic tracking-tight text-white drop-shadow-md">
                           LITE WORSHIP
                         </h1>
-                        <p className="text-xs font-mono tracking-[0.25em] text-amber-400 font-bold uppercase">
+                        <p className="text-xs font-mono tracking-[0.25em] text-sovereign-amber font-bold uppercase">
                           IN SPIRIT AND IN TRUTH
                         </p>
                       </div>
                     </div>
                   ) : slideState.type === "scripture" ? (
                     <div className="space-y-6 max-w-4xl mx-auto px-4">
-                      <p className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight text-white drop-shadow-xl leading-snug">
+                      <p className="font-serif text-3xl sm:text-4xl md:text-5xl font-medium italic leading-relaxed tracking-normal text-white drop-shadow-xl">
                         &ldquo;{slideState.content}&rdquo;
                       </p>
-                      <h3 className="font-mono text-xs sm:text-sm tracking-[0.25em] font-black text-amber-400 uppercase">
+                      <h3 className="font-mono text-xs sm:text-sm tracking-[0.25em] font-black text-sovereign-amber uppercase">
                         — {slideState.title}
                       </h3>
                     </div>
                   ) : (
-                    /* Song lyrics rendering */
-                    <div className="space-y-3 px-4">
+                    /* Song lyrics rendering with gorgeous serif typography */
+                    <div className="space-y-4 px-4">
                       {slideState.content.split("\n").map((line, idx) => (
                         <p 
                           key={idx}
-                          className={`font-display text-4xl sm:text-5xl font-black leading-none tracking-tighter drop-shadow-md ${
+                          className={`drop-shadow-md leading-relaxed ${
                             line.startsWith("[") 
-                              ? "text-amber-400 font-mono text-[11px] sm:text-xs tracking-[0.35em] uppercase py-2 font-bold" 
-                              : "text-white"
+                              ? "text-sovereign-amber font-mono text-[11px] sm:text-xs tracking-[0.35em] uppercase py-2 font-bold" 
+                              : "text-white font-serif text-3xl sm:text-4xl md:text-5xl font-medium tracking-wide italic"
                           }`}
                         >
                           {line}
@@ -268,7 +268,7 @@ export default function LivePreview({ slideState, onThemeChange }: LivePreviewPr
               onClick={() => onThemeChange && onThemeChange(themeOpt.id)}
               className={`p-1.5 px-3 rounded-lg border flex items-center space-x-1.5 transition-all text-[11px] ${
                 slideState.backgroundTheme === themeOpt.id
-                  ? "bg-amber-500/10 border-amber-500/80 text-amber-300 font-medium"
+                  ? "bg-sovereign-amber/10 border-sovereign-amber/80 text-sovereign-amber font-medium"
                   : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700"
               }`}
               id={`theme-btn-${themeOpt.id}`}
